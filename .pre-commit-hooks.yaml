@@ -4,3 +4,11 @@
   entry: check-xmllint
   language: script
   types_or: [xml]
+
+- id: format-xmllint
+  name: Running xmllint to reformat XML files to match xmllint
+  description: Formats XML files
+  entry: check-xmllint
+  args: [-i]
+  language: script
+  types_or: [xml]

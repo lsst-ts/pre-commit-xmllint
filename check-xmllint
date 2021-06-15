@@ -2,16 +2,59 @@
 
 XMLLINT=xmllint
 
+if [ -t 1 ]; then
+  R=$(tput setaf 1)
+  G=$(tput setaf 2)
+  Y=$(tput setaf 3)
+  N=$(tput sgr0)
+fi
+
+args=$(getopt i $*)
+if [ $? -ne 0 ]; then
+  echo "Usage: check-xmllint [-i] <files..>
+  -i overwrite files with xmllint formatted content
+"
+  exit 2
+fi
+set -- $args
+
+inplace=0
+
+while true; do
+  case "$1" in
+    -i)
+      inplace=1
+      ;;
+    --)
+      shift
+      break
+      ;;
+  esac
+  shift
+done
+
 retval=0
 
 for FILE in $*; do
-  echo "Checking XMLLint for $FILE"
-  if ! $XMLLINT --format $FILE | diff - $FILE; then
-    echo "XML check for $FILE: failed"
-    retval=2
+  tmpfile=$(mktemp)
+  if ! $XMLLINT --format $FILE > $tmpfile; then
+      echo "XML check for $FILE: ${R}cannot parse${N}"
   else
-    echo "XML check for $FILE: OK"
+    if ! diff $tmpfile $FILE; then
+      if [ $inplace -eq 0 ]; then
+        echo "XML check for $FILE: ${R}failed${N}"
+        retval=2
+      else
+        tmpfile=$(mktemp)
+        $XMLLINT --format $FILE > $tmpfile
+        cp $tmpfile $FILE
+        echo "XML check for $FILE: ${Y}reformatted${N}"
+      fi
+    else
+      echo "XML check for $FILE: ${G}OK${N}"
+    fi
   fi
+  rm -f $tmpfile
 done
 
 exit $retval

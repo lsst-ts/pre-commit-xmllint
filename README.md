@@ -5,7 +5,9 @@ assumed to exists in command path (*please use alias if you don't want to have c
 
 ## Operation
 
-Runs xmllint --format and overwrites reformated file.
+*check-xmllint* hook runs xmllint --format and fails if any modified file doesn't match xmllint --format output.
+
+*format-xmllint* overwrites malformed files with reformated file.
 
 ## Setting up
 
