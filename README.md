@@ -1,8 +1,8 @@
 # xmllint pre-commit hook
 
-This is a hook feeding all files through xmllint. '*xmllint*' command is
-assumed to exists in command path (*please use alias if you don't want to have
-command in a path, or modify the hook*).
+This is a [pre-commit](https://pre-commit.com) hook feeding all files through
+xmllint. '*xmllint*' command is assumed to exists in command path (*please use
+alias if you don't want to have command in a path, or modify the hook*).
 
 ## Operation
 
