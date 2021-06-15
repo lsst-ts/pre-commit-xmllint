@@ -1,0 +1,14 @@
+- id: format-xmllint
+  name: Formats XML files
+  description: Format XML files to match xmllint --format option
+  entry: check-xmllint
+  args: [-i]
+  language: script
+  types_or: [xml]
+
+- id: check-xmllint
+  name: Check XML files formatting
+  description: Check that XML files format matches xmllint --format option
+  entry: check-xmllint
+  language: script
+  types_or: [xml]
