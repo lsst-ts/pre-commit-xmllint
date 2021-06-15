@@ -25,3 +25,11 @@ and install the hook:
 ```sh
 pre-commit install
 ```
+
+## Reformating all xml files
+
+Before setting up xmllint, you can reformat all xml files to match xmllinted output with:
+
+```bash
+pre-commit try-repo https://github.com/lsst-ts/pre-commit-xmllint format-xmllint --verbose --all-files
+```
