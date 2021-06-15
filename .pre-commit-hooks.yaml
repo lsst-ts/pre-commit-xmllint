@@ -1,0 +1,6 @@
+- id: check-xmllint
+  name: Running xmllint to check XML files format
+  description: Formats XML files
+  entry: check-xmllint
+  language: script
+  types_or: [xml]

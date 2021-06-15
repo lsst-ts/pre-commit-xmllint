@@ -1,0 +1,17 @@
+#!/bin/sh
+
+XMLLINT=xmllint
+
+retval=0
+
+for FILE in $*; do
+  echo "Checking XMLLint for $FILE"
+  if ! $XMLLINT --format $FILE | diff - $FILE; then
+    echo "XML check for $FILE: failed"
+    retval=2
+  else
+    echo "XML check for $FILE: OK"
+  fi
+done
+
+exit $retval
