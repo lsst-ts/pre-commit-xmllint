@@ -50,6 +50,7 @@ for FILE in $*; do
         $XMLLINT --format $FILE > $tmpfile
         cp $tmpfile $FILE
         echo "XML check for $FILE: ${Y}reformatted${N}"
+        retval=3
       fi
     else
       echo "XML check for $FILE: ${G}OK${N}"
